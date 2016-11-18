@@ -5,7 +5,7 @@ namespace EFCore.Entities
     public class EFCoreDbContext : DbContext
     {
 
-        public EFCoreDbContext ()
+        public EFCoreDbContext (DbContextOptions<EFCoreDbContext> options):base(options)
         {
           
         }

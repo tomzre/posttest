@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCore.Entities;
+using EFCore.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,9 @@ namespace TestAPI
             loggerFactory.AddDebug();
 
             app.UseMvc();
+
+            var dataText = System.IO.File.ReadAllText(@"seed.json");
+            Seeder.PushSeed(dataText, app.ApplicationServices);
         }
     }
 }

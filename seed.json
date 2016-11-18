@@ -1,0 +1,13 @@
+[
+    {
+        "author": "Autor",
+        "body": "comment added! Well done!!",
+        "post": {
+            "title": "Hello World Post!",
+            "body": "That's the body of post",
+            "dateCreated": "2016-11-17T00:00:00",
+            "author": "Trenzin",
+            "category": {}
+        }
+    }
+]
