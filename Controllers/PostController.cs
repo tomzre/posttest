@@ -5,23 +5,24 @@ using System.Threading.Tasks;
 using EFCore.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TestAPI.Service.Interfaces;
 
 namespace TestAPI.Controllers
 {
     [Route("api/[controller]")]
     public class PostController : Controller
     {
-        private readonly EFCoreDbContext _context;
-        public PostController (EFCoreDbContext context)
+        private readonly IPostData _repo;
+        public PostController (IPostData repo)
         {
-          _context = context;
+          _repo = repo;
         }
 
         // GET api/values
         [HttpGet]
         public IActionResult GetPost()
         {
-            return Ok(_context.Comments.Include(c => c.Post).ThenInclude(p => p.Category));
+            return Ok(_repo.GetAll());
         }
 
         // GET api/values/5
@@ -29,7 +30,7 @@ namespace TestAPI.Controllers
         public IActionResult Get(int id)
         {
             
-                var cm = _context.Comments.Include(c => c.Post).ThenInclude(c => c.Category).SingleOrDefault(c => c.Id == id);
+                var cm = _repo.Get(id);
 
             return Ok(cm) ;
         }
