@@ -19,22 +19,26 @@ namespace TestAPI.Controllers
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<Comment> Get()
+        public IActionResult GetPost()
         {
-            return _context.Comments.Include(c => c.Post).ThenInclude(p => p.Category);
+            return Ok(_context.Comments.Include(c => c.Post).ThenInclude(p => p.Category));
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            
+                var cm = _context.Comments.Include(c => c.Post).ThenInclude(c => c.Category).SingleOrDefault(c => c.Id == id);
+
+            return Ok(cm) ;
         }
 
         // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            
         }
 
         // PUT api/values/5
